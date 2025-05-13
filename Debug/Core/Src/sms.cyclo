@@ -1,0 +1,2 @@
+../Core/Src/sms.c:11:6:send_sms	1
+../Core/Src/sms.c:27:6:read_sms	1

@@ -1,0 +1,5 @@
+../Core/Src/sys_init.c:17:13:SystemClock_Config	3
+../Core/Src/sys_init.c:60:13:MX_USART1_UART_Init	2
+../Core/Src/sys_init.c:76:13:MX_USART2_UART_Init	2
+../Core/Src/sys_init.c:92:13:MX_USART3_UART_Init	2
+../Core/Src/sys_init.c:108:13:MX_GPIO_Init	1

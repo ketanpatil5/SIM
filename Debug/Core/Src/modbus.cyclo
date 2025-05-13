@@ -1,0 +1,3 @@
+../Core/Src/modbus.c:16:6:HAL_UARTEx_RxEventCallback	1
+../Core/Src/modbus.c:25:6:sendData	1
+../Core/Src/modbus.c:32:6:modbus_init	1

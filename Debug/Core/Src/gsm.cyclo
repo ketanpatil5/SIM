@@ -1,0 +1,5 @@
+../Core/Src/gsm.c:14:6:send_at_command	2
+../Core/Src/gsm.c:33:6:mqtt_init	2
+../Core/Src/gsm.c:97:6:mqtt_publish	1
+../Core/Src/gsm.c:124:6:mqtt_subscribe	1
+../Core/Src/gsm.c:161:6:gsm_init	1
