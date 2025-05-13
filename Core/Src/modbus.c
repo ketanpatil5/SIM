@@ -11,6 +11,16 @@
 uint8_t RxData[32];
 uint8_t TxData[8];
 uint16_t Data[10];
+float DataM;
+
+float  IEEE754tofloat(uint32_t value) {
+	union {
+	        float f;
+	        uint32_t bytes;
+	    } u;
+	    u.bytes = value;
+    return u.f;
+}
 
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
@@ -60,4 +70,92 @@ void modbus_init(){
 	  TxData[7] = (crc>>8)&0xFF;  // CRC HIGH
 
 	  sendData(TxData);
+}
+
+float modbus_float(uint8_t SlaveID, uint8_t FunctionCode, uint8_t Address, uint8_t Datalength){
+	HAL_UARTEx_ReceiveToIdle_IT(&huart1, RxData, 32);
+	TxData[0] = SlaveID;  // slave address
+	switch (FunctionCode)
+	    {
+	        case 0x01:  // Read Coils
+	        	TxData[1] = 0x01;
+	            break;
+
+	        case 0x02:  // Read Discrete Inputs
+	        	TxData[1] = 0x02;
+	            break;
+
+	        case 0x03:  // Read Holding Registers
+	        	TxData[1] = 0x03;
+	            break;
+
+	        case 0x04:  // Read Input Registers
+	        	TxData[1] = 0x04;
+	            break;
+
+	        default:
+	        	TxData[1] = 0x04;
+	            break;
+	    }
+	//Address
+	TxData[4] = (Address >> 8) & 0xFF;  // High byte
+	TxData[5] = Address & 0xFF;         // Low byte
+	//Datalength
+	TxData[4] = (Datalength >> 8) & 0xFF;  // High byte
+	TxData[5] = Datalength & 0xFF;         // Low byte
+
+	uint16_t crc = crc16(TxData, 6);
+	TxData[6] = crc&0xFF;   // CRC LOW
+	TxData[7] = (crc>>8)&0xFF;  // CRC HIGH
+
+	sendData(TxData);
+
+		return IEEE754tofloat((Data[0]<<16|Data[1])& 0xFFFFFFFF);
+
+
+
+}
+
+int modbus_int(uint8_t SlaveID, uint8_t FunctionCode, uint8_t Address, uint8_t Datalength){
+	HAL_UARTEx_ReceiveToIdle_IT(&huart1, RxData, 32);
+	TxData[0] = SlaveID;  // slave address
+	switch (FunctionCode)
+	    {
+	        case 0x01:  // Read Coils
+	        	TxData[1] = 0x01;
+	            break;
+
+	        case 0x02:  // Read Discrete Inputs
+	        	TxData[1] = 0x02;
+	            break;
+
+	        case 0x03:  // Read Holding Registers
+	        	TxData[1] = 0x03;
+	            break;
+
+	        case 0x04:  // Read Input Registers
+	        	TxData[1] = 0x04;
+	            break;
+
+	        default:
+	        	TxData[1] = 0x04;
+	            break;
+	    }
+	//Address
+	TxData[4] = (Address >> 8) & 0xFF;  // High byte
+	TxData[5] = Address & 0xFF;         // Low byte
+	//Datalength
+	TxData[4] = (Datalength >> 8) & 0xFF;  // High byte
+	TxData[5] = Datalength & 0xFF;         // Low byte
+
+	uint16_t crc = crc16(TxData, 6);
+	TxData[6] = crc&0xFF;   // CRC LOW
+	TxData[7] = (crc>>8)&0xFF;  // CRC HIGH
+
+	sendData(TxData);
+
+		return Data[0];
+
+
+
 }

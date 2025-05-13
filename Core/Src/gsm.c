@@ -34,7 +34,7 @@ void mqtt_init(const char *broker, const char *accesstoken, const char *clientid
     char response[256];
 //    generate_negative_pulse(GPIO_PIN, 10);
     send_at_command("AT\r\n",response,500);
-    HAL_Delay(2000);// New
+    HAL_Delay(2500);// New
     send_at_command("AT+CFUN=1\r\n",response,500);
     send_at_command("AT+CREG=2\r\n",response,500);
     send_at_command("AT+CEREG=2\r\n",response,500);
@@ -87,7 +87,7 @@ void mqtt_init(const char *broker, const char *accesstoken, const char *clientid
     for(int i=0;i<3;i++){
     char mqtt_conn[256];
     snprintf(mqtt_conn, sizeof(mqtt_conn), "AT+CMQTTCONNECT=0,\"tcp://%s\",300,1,\"%s\"\r\n",broker, accesstoken);
-    send_at_command(mqtt_conn, response, 2500);
+    send_at_command(mqtt_conn, response, 2000);
     }
     HAL_Delay(1500);
     // ESP_LOGI("MQTT", "MQTT connection response: %s", response);
@@ -166,10 +166,11 @@ void gsm_init(){
     const char *clientid = "KP";
 
     mqtt_init(broker, accesstoken, clientid);
-    char msg[30];
-    sprintf(msg, "{\"temperature\":%d}", Data[0]);
-//    mqtt_publish("v1/devices/me/telemetry", "{\"temperature\": 51, \"humidity\": 03, \"flowRate\": 4, \"energy\": 91, \"volume\": 563, \"totalVolume\": 64}");
-     mqtt_publish("v1/devices/me/telemetry", msg);
+//    char msg[30];
+//    sprintf(msg, "{\"temperature\":%f}", DataM);
+//	HAL_UART_Transmit(&huart2,(uint8_t *)msg,strlen(msg),1000);
+//  mqtt_publish("v1/devices/me/telemetry", "{\"temperature\": 51, \"humidity\": 03, \"flowRate\": 4, \"energy\": 91, \"volume\": 563, \"totalVolume\": 64}");
+//    mqtt_publish("v1/devices/me/telemetry", msg);
 
     // mqtt_subscribe("v1/devices/me/telemetry");
 }

@@ -17,6 +17,11 @@ extern "C" {
 #include "stdio.h"
 #include "gsm.h"
 #include "modbus.h"
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+
 
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);

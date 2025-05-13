@@ -26,7 +26,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/sys_init.h ../Core/Inc/gsm.h ../Core/Inc/modbus.h \
- ../Core/Inc/gsm.h ../Core/Inc/modbus.h ../Core/Inc/sms.h
+ ../Core/Inc/gsm.h ../Core/Inc/modbus.h ../Core/Inc/sms.h \
+ ../Core/Inc/data.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -60,3 +61,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/gsm.h:
 ../Core/Inc/modbus.h:
 ../Core/Inc/sms.h:
+../Core/Inc/data.h:

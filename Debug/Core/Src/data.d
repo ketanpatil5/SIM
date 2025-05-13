@@ -1,4 +1,5 @@
-Core/Src/sys_init.o: ../Core/Src/sys_init.c ../Core/Inc/sys_init.h \
+Core/Src/data.o: ../Core/Src/data.c ../Core/Inc/cJSON.h \
+ ../Core/Inc/sys_init.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -25,7 +26,8 @@ Core/Src/sys_init.o: ../Core/Src/sys_init.c ../Core/Inc/sys_init.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/gsm.h ../Core/Inc/modbus.h ../Core/Inc/error_handler.h
+ ../Core/Inc/gsm.h ../Core/Inc/modbus.h
+../Core/Inc/cJSON.h:
 ../Core/Inc/sys_init.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -55,4 +57,3 @@ Core/Src/sys_init.o: ../Core/Src/sys_init.c ../Core/Inc/sys_init.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Core/Inc/gsm.h:
 ../Core/Inc/modbus.h:
-../Core/Inc/error_handler.h:

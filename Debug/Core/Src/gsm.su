@@ -2,4 +2,4 @@
 ../Core/Src/gsm.c:33:6:mqtt_init	680	static
 ../Core/Src/gsm.c:97:6:mqtt_publish	920	static
 ../Core/Src/gsm.c:124:6:mqtt_subscribe	408	static
-../Core/Src/gsm.c:161:6:gsm_init	56	static
+../Core/Src/gsm.c:161:6:gsm_init	24	static
