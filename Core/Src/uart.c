@@ -24,7 +24,7 @@ void uart_init(void){
 
 	  UartHandle.Instance          = USART2;
 
-	  UartHandle.Init.BaudRate     = 9600;
+	  UartHandle.Init.BaudRate     = 115200;
 	  UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
 	  UartHandle.Init.StopBits     = UART_STOPBITS_1;
 	  UartHandle.Init.Parity       = UART_PARITY_NONE;
@@ -39,7 +39,7 @@ void uart_init(void){
 	  }
 
 	  /* Output a message on Hyperterminal using printf function */
-	  printf("\n\r UART Printf Example: retarget the C library printf function to the UART 5555555\n\r");
+	  printf("\n\r UART Printf Example: retarget the C library printf function to the UART \r\n");
 
 }
 

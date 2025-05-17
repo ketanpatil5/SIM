@@ -12,8 +12,6 @@ void gsm_init();
 void send_at_command(const char *cmd, char *response, int timeout_ms);
 void mqtt_subscribe(const char *topic);
 void mqtt_publish(const char *topic, const char *data);
-
-extern char ATcommand[80];
-extern uint8_t buffer[30];
+void gsm_set_clock();
 
 #endif /* INC_GSM_H_ */

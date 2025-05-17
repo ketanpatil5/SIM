@@ -17,10 +17,18 @@ extern "C" {
 #include "stdio.h"
 #include "gsm.h"
 #include "modbus.h"
+#include "rtc.h"
+#include "uart.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <inttypes.h>
+#include "time.h"
+#include "cJSON.h"
+#include "address.h"
+#include "sms.h"
+#include "data.h"
 
 
 void SystemClock_Config(void);
@@ -28,10 +36,13 @@ void MX_GPIO_Init(void);
 void MX_USART2_UART_Init(void);
 void MX_USART1_UART_Init(void);
 void MX_USART3_UART_Init(void);
+void MX_RTC_Init(void);
+
 
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart3;
+extern RTC_HandleTypeDef hrtc;
 
 
 #ifdef __cplusplus

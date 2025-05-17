@@ -9,5 +9,6 @@
 #define INC_DATA_H_
 
 void data();
+void process_sensor_data(const char *json_string);
 
 #endif /* INC_DATA_H_ */

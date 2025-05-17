@@ -1,5 +1,6 @@
-../Core/Src/sys_init.c:17:13:SystemClock_Config	88	static
-../Core/Src/sys_init.c:60:13:MX_USART1_UART_Init	8	static
-../Core/Src/sys_init.c:76:13:MX_USART2_UART_Init	8	static
-../Core/Src/sys_init.c:92:13:MX_USART3_UART_Init	8	static
-../Core/Src/sys_init.c:108:13:MX_GPIO_Init	40	static
+../Core/Src/sys_init.c:19:13:SystemClock_Config	88	static
+../Core/Src/sys_init.c:58:13:MX_RTC_Init	8	static
+../Core/Src/sys_init.c:98:13:MX_USART1_UART_Init	8	static
+../Core/Src/sys_init.c:115:13:MX_USART2_UART_Init	8	static
+../Core/Src/sys_init.c:132:13:MX_USART3_UART_Init	8	static
+../Core/Src/sys_init.c:149:13:MX_GPIO_Init	40	static

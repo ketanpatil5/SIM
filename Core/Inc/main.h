@@ -51,6 +51,10 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
+extern char command[512];
+extern char ATcommand[512];
+extern uint8_t buffer[512];
+extern char response[512];
 
 /* USER CODE BEGIN EFP */
 

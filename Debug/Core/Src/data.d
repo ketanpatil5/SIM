@@ -1,5 +1,4 @@
-Core/Src/data.o: ../Core/Src/data.c ../Core/Inc/cJSON.h \
- ../Core/Inc/sys_init.h \
+Core/Src/data.o: ../Core/Src/data.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -25,10 +24,13 @@ Core/Src/data.o: ../Core/Src/data.c ../Core/Inc/cJSON.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/gsm.h ../Core/Inc/modbus.h
-../Core/Inc/cJSON.h:
-../Core/Inc/sys_init.h:
+ ../Core/Inc/sys_init.h ../Core/Inc/gsm.h ../Core/Inc/modbus.h \
+ ../Core/Inc/rtc.h ../Core/Inc/uart.h ../Core/Inc/cJSON.h \
+ ../Core/Inc/address.h ../Core/Inc/sms.h ../Core/Inc/data.h
+../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -54,6 +56,15 @@ Core/Src/data.o: ../Core/Src/data.c ../Core/Inc/cJSON.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+../Core/Inc/sys_init.h:
 ../Core/Inc/gsm.h:
 ../Core/Inc/modbus.h:
+../Core/Inc/rtc.h:
+../Core/Inc/uart.h:
+../Core/Inc/cJSON.h:
+../Core/Inc/address.h:
+../Core/Inc/sms.h:
+../Core/Inc/data.h:

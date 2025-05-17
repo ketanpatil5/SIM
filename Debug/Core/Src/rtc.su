@@ -1,0 +1,4 @@
+../Core/Src/rtc.c:13:6:rtc_int	16	static
+../Core/Src/rtc.c:37:5:is_leap_year	16	static
+../Core/Src/rtc.c:42:10:RTC_Get_Epoch	176	static
+../Core/Src/rtc.c:80:6:SetRTCFromCCLK	88	static

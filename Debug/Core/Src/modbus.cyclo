@@ -1,6 +1,7 @@
-../Core/Src/modbus.c:16:8:IEEE754tofloat	1
-../Core/Src/modbus.c:26:6:HAL_UARTEx_RxEventCallback	1
-../Core/Src/modbus.c:35:6:sendData	1
-../Core/Src/modbus.c:42:6:modbus_init	1
-../Core/Src/modbus.c:75:7:modbus_float	5
-../Core/Src/modbus.c:119:5:modbus_int	5
+../Core/Src/modbus.c:15:8:IEEE754tofloat	1
+../Core/Src/modbus.c:26:6:sendData	1
+../Core/Src/modbus.c:34:7:modbus_float	3
+../Core/Src/modbus.c:77:5:modbus_int	3
+../Core/Src/modbus.c:120:6:write_Single_Reg	1
+../Core/Src/modbus.c:143:6:write_Multiple_Reg	1
+../Core/Src/modbus.c:169:6:write_Single_coil	1
