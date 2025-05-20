@@ -129,134 +129,23 @@ void send_at_command(const char *cmd, char *response, int timeout_ms) {
 
     sprintf(ATcommand, "%s", cmd); // Safely copy the command
 
-    HAL_UART_Transmit(&huart1, (uint8_t *)ATcommand, strlen(ATcommand), timeout_ms);
+    HAL_UART_Transmit(&huart1, (uint8_t *)ATcommand, strlen(ATcommand), HAL_MAX_DELAY);
     HAL_UART_Receive(&huart1, buffer, 512, timeout_ms);
 
     if (strstr((char *)buffer, "OK")) {
         strncpy(response, (char *)buffer, 512);
         response[255] = '\0';
 
-        snprintf(command, sizeof(command), "Response: %s", response);
+        snprintf(command, sizeof(command), "Response: %s\r\n", response);
         HAL_UART_Transmit(&huart2, (uint8_t *)command, strlen(command), 1000);
     } else {
+    	strncpy(response, (char *)buffer, 512);
         response[0] = '\0';  // Clear response if "OK" not found
-        snprintf(command, sizeof(command), "Response: NO\r\n");
+        snprintf(command, sizeof(command), "ResponseNO: %s\r\n", response);
         HAL_UART_Transmit(&huart2, (uint8_t *)command, strlen(command), 1000);
     }
 
 //    HAL_Delay(1000);
-}
-
-
-
-void mqtt_init(const char *broker, const char *accesstoken, const char *clientid) {
-
-
-    send_at_command("AT\r\n",response,500);
-//    HAL_Delay(2500);// New
-    send_at_command("AT+CFUN=1\r\n",response,500);
-//    send_at_command("AT+CPIN?\r\n",response,500);
-//    send_at_command("AT+CSQ\r\n",response,500);
-    send_at_command("AT+CREG=2\r\n",response,500);
-    send_at_command("AT+CEREG=2\r\n",response,500);
-//     send_at_command("AT+COPS?\r\n",response,1000);
-    send_at_command("AT+CGDCONT=1,\"IP\",\"airtelgprs.com\"\r\n",response,500);
-
-    send_at_command("AT+CGACT=1,1\r\n",response,500);
-//    send_at_command("AT+CGATT=1\r\n",response,500);
-    send_at_command("AT+CNTP=\"asia.pool.ntp.org\",0\r\n",response,500);
-    send_at_command("AT+CNTP\r\n",response,500);
-    send_at_command("AT+CCLK?\r\n",response,500);
-     send_at_command("AT+IPADDR\r\n",response,1000);
-    send_at_command("AT+CGATT=1\r\n",response,500);
-//    send_at_command("AT+CGPADDR=1\r\n",response,500);
-//     send_at_command("AT+CGACT?\r\n",response,1000);
-//     send_at_command("AT+CEREG?\r\n",response,1000);
-    send_at_command("AT+NETOPEN\r\n",response,500);
-//     send_at_command("AT+NETOPEN?\r\n",response,1000);
-
-    /*AT+CCERTDOWN="ca_cert.pem", 1970
-AT+CCERTDOWN="client_cert.pem", 1970
-AT+CCERTDOWN="client_key.pem", 1970
-AT+CCERTDOWN="password.pem", 1970
-
-*Assign config file
-
-AT+CSSLCFG="cacert",0,"ca_cert.pem"
-AT+CSSLCFG="clientcert",0,"client_cert.pem"
-AT+CSSLCFG="clientkey",0,"client_key.pem"
-AT+CSSLCFG="password",0,"password.pem"*/
-//    char at_command[100];
-//
-//    sprintf(at_command, "AT+CCERTDOWN=\"ca_cert.pem\",%d\r\n", cert_size);
-//    send_at_command(at_command, response, 1000);
-//    if (strchr(response, '>') != NULL) {
-//    	send_at_command(ca_cert, response, 1000);
-//
-//    }
-//
-//
-//    sprintf(at_command, "AT+CCERTDOWN=\"client_cert.pem\",%d\r\n", certificate_size);
-//    send_at_command(at_command, response, 1000);
-//    if (strchr(response, '>') != NULL) {
-//    	send_at_command(certificate, response, 1000);
-//    }
-//
-//
-//    sprintf(at_command, "AT+CCERTDOWN=\"client_key.pem\",%d\r\n", private_key_size);
-//    send_at_command(at_command, response, 1000);
-//    if (strchr(response, '>') != NULL) {
-//    	send_at_command(private_key, response, 1000);
-//    }
-//    send_at_command("AT+CSSLCFG=\"cacert\",0,\"ca_cert.pem\"\r\n",response,1000);
-//    send_at_command("AT+CSSLCFG=\"clientcert\",0,\"client_cert.pem\"\r\n",response,1000);
-//    send_at_command("AT+CSSLCFG=\"clientkey\",0,\"client_key.pem\"\r\n",response,1000);
-
-
-
-
-
-     send_at_command("AT+CSSLCFG=\"sslversion\",0,4\r\n",response,1000);
-    send_at_command("AT+CSSLCFG=\"authmode\",0,1\r\n",response,500);
-    send_at_command("AT+CSSLCFG=\"cacert\",0,\"ca_cert.pem\"\r\n",response,500);
-//     send_at_command("AT+CSSLCFG=\"clientcert\",0,\"client_cert.pem\"\r\n",response,1000);
-//     send_at_command("AT+CSSLCFG=\"clientkey\",0,\"client_key.pem\"\r\n",response,1000);
-//     send_at_command("AT+CSSLCFG=\"password\",0,\"password.pem\"\r\n",response,1000);
-    send_at_command("AT+CSSLCFG=\"enableSNI\",0,1\r\n",response,500);
-
-    send_at_command("AT+CMQTTSTART\r\n", response, 500);
-    send_at_command("AT+CCHSET=1,1\r\n", response, 500);
-    send_at_command("AT+CCHMODE=1\r\n", response, 500);
-    send_at_command("AT+CCHSTART\r\n", response, 500);
-    send_at_command("AT+CCHADDR\r\n", response, 500);
-
-//     send_at_command("AT+CCHOPEN\r\n", response, 500);
-    send_at_command("AT+CCHCFG=\"sendtimeout\",0,60\r\n", response, 500);
-    send_at_command("AT+CCHCFG=\"sslctx\",0,1\r\n", response, 500);
-//     send_at_command("AT+CCERTMOVE=\"ca_cert.pem\"\r\n", response, 500);
-    send_at_command("AT+CMQTTSSLCFG=0,1\r\n", response, 500);
-    send_at_command("AT+CSSLCFG=0\r\n",response,500);
-
-    //Set ID
-    char mqtt_id[128];
-    snprintf(mqtt_id, sizeof(mqtt_id), "AT+CMQTTACCQ=0,\"%s\",1\r\n",accesstoken);
-    send_at_command(mqtt_id, response, 500);
-
-    send_at_command("AT+CMQTTCFG=\"checkUTF8\",0,1\r\n",response,1000);
-    send_at_command("AT+CMQTTCFG=\"optimeout\",0,60\r\n",response,1000);
-//     send_at_command("AT+CMQTTCONNECT?\r\n",response,100);
-//     send_at_command("AT+CCERTLIST", response, 1000);
-    // send_at_command("AT+CCERTDELE=\"ca_cert.pem\"", response, 1000);
-
-//    for(int i=0;i<3;i++){
-    char mqtt_conn[256];
-    snprintf(mqtt_conn, sizeof(mqtt_conn), "AT+CMQTTCONNECT=0,\"tcp://%s\",300,1,\"%s\"\r\n",broker, accesstoken);
-//    snprintf(mqtt_conn, sizeof(mqtt_conn), "AT+CMQTTCONNECT=0,\"tcp://%s\",300,1,\"%s,\"%s\"\r\n",broker, accesstoken, clientid);
-    send_at_command(mqtt_conn, response, 2500);
-//    }
-//    HAL_Delay(1500);
-    // ESP_LOGI("MQTT", "MQTT connection response: %s", response);
-
 }
 
 void mqtt_publish(const char *topic, const char *data) {
@@ -322,17 +211,144 @@ void mqtt_subscribe(const char *topic) {
     // send_at_command("AT+CMQTTDISC=0,60\r\n", response, 2000);
     // send_at_command("AT+CMQTTSTOP\r\n",response,1000);
 
+}
+
+void mqtt_init(const char *broker, const char *accesstoken, const char *clientid) {
+
+
+    send_at_command("AT\r\n",response,500);
+    send_at_command("ATI\r\n",response,500);
+//    HAL_Delay(2500);// New
+//    send_at_command("AT+CFUN=1\r\n",response,500);
+//    send_at_command("AT+CPIN?\r\n",response,500);
+    send_at_command("AT+CSQ\r\n",response,500);
+//    send_at_command("AT+CREG=2\r\n",response,500);
+//    send_at_command("AT+CEREG=2\r\n",response,500);
+     send_at_command("AT+COPS?\r\n",response,1000);
+    send_at_command("AT+CGDCONT=1,\"IP\",\"airtelgprs.com\"\r\n",response,500);
+
+    send_at_command("AT+CGATT=1\r\n",response,500);
+    send_at_command("AT+CGACT=0,1\r\n",response,500);
+
+    send_at_command("AT+CGPADDR\r\n",response,500);
+    send_at_command("AT+CNTP=\"asia.pool.ntp.org\",0\r\n",response,500);
+    send_at_command("AT+CNTP\r\n",response,500);
+    send_at_command("AT+CCLK?\r\n",response,500);
+     send_at_command("AT+IPADDR\r\n",response,1000);
+//    send_at_command("AT+CGATT=1\r\n",response,500);
+//    send_at_command("AT+CGPADDR=1\r\n",response,500);
+     send_at_command("AT+CGACT?\r\n",response,1000);
+     send_at_command("AT+CEREG?\r\n",response,1000);
+    send_at_command("AT+NETOPEN\r\n",response,500);
+//     send_at_command("AT+NETOPEN?\r\n",response,1000);
+
+//     send_at_command("AT+NETSTATE\r\n",response,1000);
+
+    /*AT+CCERTDOWN="ca_cert.pem", 1970
+AT+CCERTDOWN="client_cert.pem", 1970
+AT+CCERTDOWN="client_key.pem", 1970
+AT+CCERTDOWN="password.pem", 1970
+
+*Assign config file
+
+AT+CSSLCFG="cacert",0,"ca_cert.pem"
+AT+CSSLCFG="clientcert",0,"client_cert.pem"
+AT+CSSLCFG="clientkey",0,"client_key.pem"
+AT+CSSLCFG="password",0,"password.pem"*/
+//    char at_command[200];
+//
+//    sprintf(at_command, "AT+CCERTDOWN=\"ca_cert.pem\",%d\r\n", cert_size);
+//    send_at_command(at_command, response, 1000);
+//    if (strchr(response, '>') != NULL) {
+//    	send_at_command(ca_cert, response, 5000);
+//
+//    }
+//    sprintf(at_command, "AT+CCERTDOWN=\"client_cert.pem\",%d\r\n", certificate_size);
+//    send_at_command(at_command, response, 1000);
+//    if (strchr(response, '>') != NULL) {
+//    	send_at_command(certificate, response, 5000);
+//    }
+//
+//
+//    sprintf(at_command, "AT+CCERTDOWN=\"client_key.pem\",%d\r\n", private_key_size);
+//    send_at_command(at_command, response, 1000);
+//    if (strchr(response, '>') != NULL) {
+//    	send_at_command(private_key, response, 5000);
+//
+//    }
+    send_at_command("AT+CMQTTSTART\r\n",response,100);
+//     send_at_command("AT+CCERTMOVE=\"ca_cert.pem\"\r\n", response, 1000);
+//     send_at_command("AT+CCERTMOVE=\"client_cert.pem\"\r\n", response, 1000);
+//     send_at_command("AT+CCERTMOVE=\"client_key.pem\"\r\n", response, 1000);
+//    send_at_command("AT+CSSLCFG=\"cacert\",0,\"cacert.pem\"\r\n",response,1000);
+//    send_at_command("AT+CSSLCFG=\"clientcert\",0,\"clientcert.pem\"\r\n",response,1000);
+//    send_at_command("AT+CSSLCFG=\"clientkey\",0,\"clientkey.pem\"\r\n",response,1000);
+
+
+
+
+
+     send_at_command("AT+CSSLCFG=\"sslversion\",0,4\r\n",response,1000);
+    send_at_command("AT+CSSLCFG=\"authmode\",0,2\r\n",response,500);
+    send_at_command("AT+CSSLCFG=\"cacert\",0,\"ca_cert.pem\"\r\n",response,500);
+     send_at_command("AT+CSSLCFG=\"clientcert\",0,\"client_cert.pem\"\r\n",response,1000);
+     send_at_command("AT+CSSLCFG=\"clientkey\",0,\"client_key.pem\"\r\n",response,1000);
+//     send_at_command("AT+CSSLCFG=\"password\",0,\"password.pem\"\r\n",response,1000);
+    send_at_command("AT+CSSLCFG=\"enableSNI\",0,1\r\n",response,500);
+
+//    send_at_command("AT+CCHSET=1,1\r\n", response, 500);
+//    send_at_command("AT+CCHMODE=1\r\n", response, 500);
+//    send_at_command("AT+CMQTTSTART\r\n", response, 500);
+//    send_at_command("AT+CCHSTART\r\n", response, 500);
+//    send_at_command("AT+CCHADDR\r\n", response, 500);
+//    send_at_command("AT+CCHOPEN\r\n", response, 500);
+
+
+
+//    send_at_command("AT+CCHCFG=\"sendtimeout\",0,60\r\n", response, 500);
+//    send_at_command("AT+CCHCFG=\"sslctx\",0,1\r\n", response, 500);
+
+//    send_at_command("AT+CMQTTSSLCFG=0,0\r\n", response, 500);
+//    send_at_command("AT+CSSLCFG=0,4,2,0,300,\"cacert.pem\",\"clientcert.pem\",\"clientkey.pem\","",1\r\n",response,1000);
+
+    //Set ID
+    char mqtt_id[512];
+//    snprintf(mqtt_id, sizeof(mqtt_id), "AT+CMQTTACCQ=0,\"%s\",1\r\n",accesstoken);
+    snprintf(mqtt_id, sizeof(mqtt_id), "AT+CMQTTACCQ=0,\"%s\",1\r\n",clientid);
+    send_at_command(mqtt_id, response, 2000);
+
+//    send_at_command("AT+CMQTTCFG=\"checkUTF8\",0,1\r\n",response,1000);
+//    send_at_command("AT+CMQTTCFG=\"optimeout\",0,60\r\n",response,1000);
+     send_at_command("AT+CMQTTCONNECT?\r\n",response,1000);
+     send_at_command("AT+CCERTLIST", response, 1000);
+    // send_at_command("AT+CCERTDELE=\"ca_cert.pem\"", response, 1000);
+
+    for(int i=0;i<3;i++){
+    char mqtt_conn[512];
+    snprintf(mqtt_conn, sizeof(mqtt_conn), "AT+CMQTTCONNECT=0,\"tcp://%s\",60,1,\"%s\"\r\n",broker, accesstoken);
+
+//    snprintf(mqtt_conn, sizeof(mqtt_conn), "AT+CMQTTCONNECT=0,\"tcp://%s\",300,1,\"%s,\"%s\"\r\n",broker, accesstoken, clientid);
+    printf(mqtt_conn);
+    send_at_command(mqtt_conn, response, 10000);
+    }
+//    HAL_Delay(1500);
+    // ESP_LOGI("MQTT", "MQTT connection response: %s", response);
 
 }
+
+
 void gsm_init(){
 
     // Initialize MQTT
-    const char *broker = "thingsboard.cloud:8883";
-    const char *accesstoken = "aCWxFWJedGshl1DowCT8";
-    const char *clientid = "KP";
+//    const char *broker = "thingsboard.cloud:8883";
+//    const char *accesstoken = "aCWxFWJedGshl1DowCT8";
+//    const char *clientid = "KP";
 //    const char *broker = "61f18205d9d64ad1b29f6e99d0679efc.s1.eu.hivemq.cloud:8883";
 //    const char *accesstoken = "demo1";
 //    const char *clientid = "Demo1234";
+    const char *broker = "a38rhx6jdboq9n-ats.iot.ap-south-1.amazonaws.com:8883";
+    const char *accesstoken = "Device_001";
+    const char *clientid = "Device_001";
 
     mqtt_init(broker, accesstoken, clientid);
 //    char msg[30];

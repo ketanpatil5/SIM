@@ -42,7 +42,7 @@ void data() {
         HAL_UART_Transmit(&huart2,(uint8_t *)Json,strlen(Json),1000);
         // === Use this string to send over MQTT ===
         mqtt_publish("v1/devices/me/telemetry", json_str);
-        process_sensor_data(json_str);
+//        process_sensor_data(json_str);
 
         free(json_str);
     }

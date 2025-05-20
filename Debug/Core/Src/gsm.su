@@ -1,6 +1,6 @@
 ../Core/Src/gsm.c:125:6:send_at_command	24	static
-../Core/Src/gsm.c:152:6:mqtt_init	416	static
-../Core/Src/gsm.c:262:6:mqtt_publish	664	static
-../Core/Src/gsm.c:286:6:mqtt_subscribe	152	static
-../Core/Src/gsm.c:327:6:gsm_init	24	static
-../Core/Src/gsm.c:347:6:gsm_set_clock	608	static
+../Core/Src/gsm.c:151:6:mqtt_publish	664	static
+../Core/Src/gsm.c:175:6:mqtt_subscribe	152	static
+../Core/Src/gsm.c:216:6:mqtt_init	1064	static
+../Core/Src/gsm.c:342:6:gsm_init	24	static
+../Core/Src/gsm.c:365:6:gsm_set_clock	608	static
